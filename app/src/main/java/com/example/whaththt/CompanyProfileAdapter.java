@@ -2,6 +2,7 @@
 package com.example.whaththt;
 
 
+import static android.app.PendingIntent.getActivity;
 import static androidx.core.content.ContentProviderCompat.requireContext;
 
 import android.content.Context;
@@ -37,7 +38,6 @@ public class CompanyProfileAdapter extends ArrayAdapter<UserCompany> {
         TextView textName;
         RatingBar ratingBar;
         MapView mapView;
-        NormalHomeFragment normalHomeFragment;
 
     }
 
@@ -79,8 +79,6 @@ public class CompanyProfileAdapter extends ArrayAdapter<UserCompany> {
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom((new LatLng(profileItem.getAddress().getLatitude(), profileItem.getAddress().getLongitude())), 10));
             }
         });
-
-
 
         return convertView;
     }

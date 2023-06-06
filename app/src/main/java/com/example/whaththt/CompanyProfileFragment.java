@@ -113,8 +113,6 @@ public class CompanyProfileFragment extends Fragment implements OnMapReadyCallba
         mapView.onResume();
         loadUserData();
 
-
-
         imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {

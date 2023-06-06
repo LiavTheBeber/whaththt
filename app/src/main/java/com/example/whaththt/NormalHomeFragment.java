@@ -1,6 +1,7 @@
 package com.example.whaththt;
 import static android.content.Context.MODE_PRIVATE;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -39,17 +40,16 @@ import io.grpc.Context;
 public class NormalHomeFragment extends Fragment {
 
     private ListView listViewProfiles;
-    //private CompanyProfileAdapter profileAdapter;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor myEdit;
     FirebaseFirestore companyUsersDB;
     CollectionReference companyRef;
     FirebaseStorage firebaseStorage;
     StorageReference imageRef;
-    String username;
-    float ratingBar;
     GeoPoint geoPoint;
     LatLng location;
+    CompanyProfileAdapter companyProfileAdapter;
+    List<UserCompany> profileItems;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,12 +78,40 @@ public class NormalHomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        companyRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        profileItems = new ArrayList<>();
+        companyProfileAdapter = new CompanyProfileAdapter(requireContext(), profileItems);
+        listViewProfiles.setAdapter(companyProfileAdapter);
+
+        AddItems();
+
+        listViewProfiles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
+                UserCompany selectedItem = (UserCompany) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(requireContext(),AuthenticationActivity.class);
+                intent.putExtra("selectedItem", selectedItem);
+
+                startActivity(intent);
+
+            }
+        });
+
+
+
+
+
+
+    }
+
+
+    private void AddItems()
+    {
+        companyRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+        {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    List<UserCompany> profileItems = new ArrayList<>();
-                    CompanyProfileAdapter companyProfileAdapter = new CompanyProfileAdapter(requireContext(), profileItems);
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         // Retrieve data from the document
                         String username = document.getString("username");
@@ -122,30 +150,20 @@ public class NormalHomeFragment extends Fragment {
 
                     // Create and set the adapter
                     companyProfileAdapter.notifyDataSetChanged();
-                    listViewProfiles.setAdapter(companyProfileAdapter);
                 } else {
                     // Handle the error
                 }
             }
         });
-        listViewProfiles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                UserCompany selectedItem = (UserCompany) adapterView.getItemAtPosition(i);
-                navigateToViewCompanyProfileFragment();
-            }
-        });
-
     }
 
-    private void navigateToViewCompanyProfileFragment() {
-       ViewCompanyProfileFragment viewCompanyProfileFragment = new ViewCompanyProfileFragment();
 
 
-
+    public void navigateToViewCompanyProfileFragment() {
+        ViewCompanyProfileFragment viewCompanyProfileFragment = new ViewCompanyProfileFragment();
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.auth_frame_layout, viewCompanyProfileFragment)
+                .replace(getId(), viewCompanyProfileFragment)
                 .commit();
     }
 }
