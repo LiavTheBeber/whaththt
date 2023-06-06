@@ -1,4 +1,4 @@
-package com.example.whaththt;
+package com.example.whaththt.company_classes;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -24,7 +24,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.LatLng;
+import com.example.whaththt.MainActivity;
+import com.example.whaththt.MapsFragment;
+import com.example.whaththt.R;
+import com.example.whaththt.normal_classes.NormalRegisterFragment;
+import com.example.whaththt.UserCompany;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -36,7 +40,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
@@ -119,7 +122,7 @@ public class CompanyRegisterFragment extends Fragment {
         wantUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToOtherRegisterFragment(new RegisterFragment());
+                navigateToOtherRegisterFragment(new NormalRegisterFragment());
             }
         });
 

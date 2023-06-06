@@ -1,31 +1,27 @@
-package com.example.whaththt;
-import static android.content.Context.MODE_PRIVATE;
+package com.example.whaththt.normal_classes;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.whaththt.R;
+import com.example.whaththt.UserCompany;
+import com.example.whaththt.company_classes.CompanyProfileAdapter;
+import com.example.whaththt.company_classes.ViewCompanyProfileFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.badge.BadgeUtils;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -34,16 +30,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import io.grpc.Context;
 
 public class NormalHomeFragment extends Fragment {
 
     private ListView listViewProfiles;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor myEdit;
     FirebaseFirestore companyUsersDB;
     CollectionReference companyRef;
     FirebaseStorage firebaseStorage;
@@ -62,17 +53,13 @@ public class NormalHomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_normal_home, container, false);
         listViewProfiles = view.findViewById(R.id.listViewProfiles);
         firebaseStorage  = FirebaseStorage.getInstance();
 
 
          companyUsersDB = FirebaseFirestore.getInstance();
          companyRef = companyUsersDB.collection("CompanyUserDB");
-
-
-        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
-        myEdit = sharedPreferences.edit();
 
         return view;
     }

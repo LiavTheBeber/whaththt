@@ -1,4 +1,4 @@
-package com.example.whaththt;
+package com.example.whaththt.company_classes;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -22,6 +22,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.whaththt.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;

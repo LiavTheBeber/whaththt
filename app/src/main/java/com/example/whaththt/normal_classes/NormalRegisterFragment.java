@@ -1,4 +1,4 @@
-package com.example.whaththt;
+package com.example.whaththt.normal_classes;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -21,30 +21,26 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.whaththt.CompanyRegisterFragment;
 import com.example.whaththt.MainActivity;
 import com.example.whaththt.R;
+import com.example.whaththt.User;
+import com.example.whaththt.company_classes.CompanyRegisterFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-public class RegisterFragment extends Fragment {
+public class NormalRegisterFragment extends Fragment {
 
     TextInputEditText etRegUsername;
     TextInputEditText etRegPhone;

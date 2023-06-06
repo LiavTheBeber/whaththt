@@ -46,10 +46,8 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public byte[] getImage() {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        return stream.toByteArray();
+    public Bitmap getImage() {
+        return image;
     }
 
     public void setImage(Bitmap image) {

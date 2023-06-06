@@ -1,4 +1,4 @@
-package com.example.whaththt;
+package com.example.whaththt.company_classes;
 
 import android.os.Bundle;
 
@@ -11,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.whaththt.normal_classes.NormalHomeFragment;
+import com.example.whaththt.R;
 
 
 public class ViewCompanyProfileFragment extends Fragment {
@@ -41,12 +44,12 @@ public class ViewCompanyProfileFragment extends Fragment {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToHomeFragment();
+                NavigateToNormalHomeFragment();
             }
         });
     }
 
-    private void navigateToHomeFragment() {
+    private void NavigateToNormalHomeFragment() {
         NormalHomeFragment normalHomeFragment = new NormalHomeFragment();
 
 

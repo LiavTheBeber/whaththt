@@ -1,35 +1,29 @@
 
-package com.example.whaththt;
+package com.example.whaththt.company_classes;
 
 
 import static android.app.PendingIntent.getActivity;
-import static androidx.core.content.ContentProviderCompat.requireContext;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.fragment.app.FragmentManager;
-
+import com.example.whaththt.normal_classes.NormalHomeFragment;
+import com.example.whaththt.R;
+import com.example.whaththt.UserCompany;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.protobuf.ByteOutput;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class CompanyProfileAdapter extends ArrayAdapter<UserCompany> {
