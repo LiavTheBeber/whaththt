@@ -28,7 +28,7 @@ import com.example.whaththt.MainActivity;
 import com.example.whaththt.MapsFragment;
 import com.example.whaththt.R;
 import com.example.whaththt.normal_classes.NormalRegisterFragment;
-import com.example.whaththt.UserCompany;
+import com.example.whaththt.side_classes.UserCompany;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;

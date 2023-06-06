@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.whaththt.R;
-import com.example.whaththt.UserCompany;
+import com.example.whaththt.side_classes.UserCompany;
 import com.example.whaththt.company_classes.CompanyProfileAdapter;
 import com.example.whaththt.company_classes.ViewCompanyProfileFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -71,6 +71,7 @@ public class NormalHomeFragment extends Fragment {
         profileItems = new ArrayList<>();
         companyProfileAdapter = new CompanyProfileAdapter(requireContext(), profileItems,this);
         listViewProfiles.setAdapter(companyProfileAdapter);
+
         AddItems();
 
 

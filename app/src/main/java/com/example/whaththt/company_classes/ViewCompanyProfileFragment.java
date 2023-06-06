@@ -47,6 +47,12 @@ public class ViewCompanyProfileFragment extends Fragment {
                 NavigateToNormalHomeFragment();
             }
         });
+
+
+
+
+
+
     }
 
     private void NavigateToNormalHomeFragment() {

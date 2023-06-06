@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.whaththt.normal_classes.NormalHomeFragment;
 import com.example.whaththt.R;
-import com.example.whaththt.UserCompany;
+import com.example.whaththt.side_classes.UserCompany;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -34,8 +34,6 @@ public class CompanyProfileAdapter extends ArrayAdapter<UserCompany> {
         TextView textName;
         RatingBar ratingBar;
         MapView mapView;
-
-
 
     }
     NormalHomeFragment normalHomeFragment;
@@ -60,7 +58,9 @@ public class CompanyProfileAdapter extends ArrayAdapter<UserCompany> {
             convertView.setTag(viewHolder);
 
 
-        } else {
+        }
+        else
+        {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 

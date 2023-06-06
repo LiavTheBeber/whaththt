@@ -13,6 +13,7 @@ import com.example.whaththt.company_classes.CompanyHomeFragment;
 import com.example.whaththt.company_classes.CompanyProfileFragment;
 import com.example.whaththt.normal_classes.NormalHomeFragment;
 import com.example.whaththt.normal_classes.NormalProfileFragment;
+import com.example.whaththt.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -38,6 +39,15 @@ public class MainActivity extends AppCompatActivity {
         intent = getIntent();
         bottomNavView = findViewById(R.id.bottomNavigationView);
         receivedString = intent.getStringExtra("normalUser");
+
+        if (receivedString.equals("1")){
+            replaceFragment(new NormalHomeFragment());
+        }
+        else if (receivedString.equals("2")) {
+            replaceFragment(new CompanyHomeFragment());
+        }
+
+
 
 
         bottomNavView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

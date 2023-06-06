@@ -23,7 +23,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.whaththt.MainActivity;
 import com.example.whaththt.R;
-import com.example.whaththt.User;
+import com.example.whaththt.side_classes.User;
 import com.example.whaththt.company_classes.CompanyRegisterFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

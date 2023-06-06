@@ -1,14 +1,11 @@
 package com.example.whaththt.company_classes;
-import static android.content.Context.MODE_PRIVATE;
 
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -16,10 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.whaththt.R;
-import com.example.whaththt.User;
-import com.example.whaththt.UserCompany;
-import com.example.whaththt.company_classes.CompanyProfileAdapter;
-import com.example.whaththt.company_classes.ViewCompanyProfileFragment;
+import com.example.whaththt.side_classes.User;
 import com.example.whaththt.normal_classes.ViewNormalProfileFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -93,10 +87,6 @@ public class CompanyHomeFragment extends Fragment {
                         String documentId = document.getId();
                         imageRef = firebaseStorage.getReference().child("images/" + documentId + ".jpg");
 
-                        geoPoint=document.getGeoPoint("address");
-                        double latitude = geoPoint.getLatitude();
-                        double longitude = geoPoint.getLongitude();
-                        location = new LatLng(latitude, longitude);
                         // Create a temporary UserCompany object without the image
                         User user = new User(username,null,null,null);
 

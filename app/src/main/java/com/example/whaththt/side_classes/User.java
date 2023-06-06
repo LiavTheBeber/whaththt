@@ -1,4 +1,4 @@
-package com.example.whaththt;
+package com.example.whaththt.side_classes;
 
 import android.graphics.Bitmap;
 
