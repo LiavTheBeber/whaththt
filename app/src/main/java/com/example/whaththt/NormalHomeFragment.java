@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.badge.BadgeUtils;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -50,6 +52,7 @@ public class NormalHomeFragment extends Fragment {
     LatLng location;
     CompanyProfileAdapter companyProfileAdapter;
     List<UserCompany> profileItems;
+    Button btn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,27 +82,9 @@ public class NormalHomeFragment extends Fragment {
 
 
         profileItems = new ArrayList<>();
-        companyProfileAdapter = new CompanyProfileAdapter(requireContext(), profileItems);
+        companyProfileAdapter = new CompanyProfileAdapter(requireContext(), profileItems,this);
         listViewProfiles.setAdapter(companyProfileAdapter);
-
         AddItems();
-
-        listViewProfiles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
-                UserCompany selectedItem = (UserCompany) parent.getItemAtPosition(position);
-
-                Intent intent = new Intent(requireContext(),AuthenticationActivity.class);
-                intent.putExtra("selectedItem", selectedItem);
-
-                startActivity(intent);
-
-            }
-        });
-
-
-
-
 
 
     }

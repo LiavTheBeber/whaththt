@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -33,21 +34,26 @@ import java.util.List;
 
 public class CompanyProfileAdapter extends ArrayAdapter<UserCompany> {
 
+
     private static class ViewHolder {
         ImageView imageProfile;
         TextView textName;
         RatingBar ratingBar;
         MapView mapView;
 
-    }
 
-    public CompanyProfileAdapter(Context context, List<UserCompany> profileItems) {
+
+    }
+    NormalHomeFragment normalHomeFragment;
+    public CompanyProfileAdapter(Context context, List<UserCompany> profileItems,NormalHomeFragment normalHomeFragment) {
         super(context, 0, profileItems);
+        this.normalHomeFragment = normalHomeFragment;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         UserCompany profileItem = getItem(position);
+
 
         ViewHolder viewHolder;
         if (convertView == null) {
@@ -58,6 +64,8 @@ public class CompanyProfileAdapter extends ArrayAdapter<UserCompany> {
             viewHolder.ratingBar = convertView.findViewById(R.id.ratingBar);
             viewHolder.mapView = convertView.findViewById(R.id.mapView);
             convertView.setTag(viewHolder);
+
+
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
@@ -69,6 +77,7 @@ public class CompanyProfileAdapter extends ArrayAdapter<UserCompany> {
         viewHolder.ratingBar.setRating(profileItem.getRatingBar());
         viewHolder.ratingBar.setIsIndicator(true);
         viewHolder.mapView.onCreate(null);
+
         viewHolder.mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
@@ -79,6 +88,13 @@ public class CompanyProfileAdapter extends ArrayAdapter<UserCompany> {
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom((new LatLng(profileItem.getAddress().getLatitude(), profileItem.getAddress().getLongitude())), 10));
             }
         });
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                normalHomeFragment.navigateToViewCompanyProfileFragment();
+            }
+        });
+
 
         return convertView;
     }
