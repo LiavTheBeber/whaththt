@@ -1,7 +1,6 @@
 package com.example.whaththt.settings.account;
 
 public class AccountItem {
-    private int imageResource;
     private String itemTitle;
     private  String itemDescription;
 
@@ -28,4 +27,5 @@ public class AccountItem {
     public void setItemDescription(String itemDescription) {
         this.itemDescription = itemDescription;
     }
+
 }

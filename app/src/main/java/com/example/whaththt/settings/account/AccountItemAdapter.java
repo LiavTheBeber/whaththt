@@ -20,7 +20,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
     public AccountItemAdapter(Context context, List<AccountItem> accountItems) {
         super(context, 0, accountItems);
     }
-    SettingsFragment settingsFragment;
+    SettingsAccountFragment settingsAccountFragment;
     private static class ViewHolder{
         TextView textItemDescription;
         TextView textViewTitle;
@@ -43,12 +43,6 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
 
         viewHolder.textItemDescription.setText(accountItem.getItemTitle());
         viewHolder.textViewTitle.setText(accountItem.getItemTitle());
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                settingsFragment.navigateToAccountFragment();
-            }
-        });
 
         return convertView;
 

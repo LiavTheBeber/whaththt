@@ -55,16 +55,18 @@ public class SettingsFragment extends Fragment {
         listViewItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
-                SettingsItem settingItem = (SettingsItem) parent.getItemAtPosition(position);
+                SettingsItem selectedItem = (SettingsItem) parent.getItemAtPosition(position);
 
-                Toast.makeText(requireContext(), settingItem.getItemTitle() , Toast.LENGTH_SHORT).show();
-                navigateToAccountFragment();
+                if (selectedItem.getItemTitle().toString().equals("Account")){
+                    replaceFragment(new SettingsAccountFragment());
+                }
+
+
+
+
 
             }
         });
-
-
-
 
 
 
@@ -79,11 +81,16 @@ public class SettingsFragment extends Fragment {
         settingItems.add(new SettingsItem(R.drawable.baseline_help_outline_24,"About"));
         settingsItemAdapter.notifyDataSetChanged();
     }
-    public void navigateToAccountFragment() {
-        SettingsAccountFragment settingsAccountFragment = new SettingsAccountFragment();
+
+
+
+
+
+    public void replaceFragment(Fragment fragment) {
+
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(getId(), settingsAccountFragment)
+                .replace(getId(), fragment)
                 .commit();
     }
 

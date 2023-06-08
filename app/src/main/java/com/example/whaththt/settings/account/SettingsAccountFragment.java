@@ -20,6 +20,7 @@ import com.example.whaththt.side_classes.User;
 import com.example.whaththt.side_classes.UserCompany;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -36,22 +37,23 @@ public class SettingsAccountFragment extends Fragment {
 
     private ListView listViewItems;
     private List<AccountItem> accountItems;
-    private List<UserCompany> cUserItem;
-    private List<User> userItem;
     private AccountItemAdapter accountItemAdapter;
-    private String userType;
-    GeoPoint geoPoint;
-    LatLng location;
-    CollectionReference userCollectionRef;
+
+    private String KEY_USERNAME = "Username";
+    private String KEY_EMAIL = "Email";
+    private String KEY_PHONE = "Phone";
+
+    private String userID,username,email,phone;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore firestore;
+    private DocumentReference docRef;
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle args = getArguments();
-        if (args != null) {
-            userType = args.getString("normalUser");
-        }
-
     }
 
     @Override
@@ -59,20 +61,34 @@ public class SettingsAccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings_account, container, false);
-
-
         listViewItems = view.findViewById(R.id.list_view_items);
+        mAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         accountItems =  new ArrayList<>();
         accountItemAdapter  = new AccountItemAdapter(requireContext(),accountItems);
         listViewItems.setAdapter(accountItemAdapter);
-        AddItems();
 
+        userID = mAuth.getCurrentUser().getUid();
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+
+                username = documentSnapshot.getString("username");
+                email = documentSnapshot.getString("email");
+                phone = documentSnapshot.getString("phone");
+
+                accountItems.add(new AccountItem(KEY_USERNAME,username));
+                accountItems.add(new AccountItem(KEY_EMAIL,email));
+                accountItems.add(new AccountItem(KEY_PHONE,phone));
+
+            }
+        });
 
         listViewItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -85,47 +101,6 @@ public class SettingsAccountFragment extends Fragment {
         });
 
 
-    }
-    private void AddItems() {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-
-        if (userType.equals("1")) {
-            userCollectionRef = FirebaseFirestore.getInstance().collection("UsersDB");
-        } else if (userType.equals("2")) {
-            userCollectionRef = FirebaseFirestore.getInstance().collection("CompanyUserDB");
-        } else {
-            // Handle the case when the user type is unknown or not provided
-            return;
-        }
-
-        userCollectionRef.document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        String username = document.getString("username");
-                        String email = document.getString("email");
-                        String phone = document.getString("phone");
-                        if(userType.equals("2")){
-                            geoPoint=document.getGeoPoint("address");
-                            double latitude = geoPoint.getLatitude();
-                            double longitude = geoPoint.getLongitude();
-                            location = new LatLng(latitude, longitude);
-                            UserCompany userCompany = new UserCompany(username,email,"",phone,new GeoPoint(latitude,longitude),null,1);
-                            cUserItem.add(userCompany);
-                        }
-                        else {
-                            User user = new User(username,email,phone,null);
-                            userItem.add(user);
-                        }
-                    }
-                } else {
-                    // Handle the error
-                }
-            }
-        });
     }
 
 }
