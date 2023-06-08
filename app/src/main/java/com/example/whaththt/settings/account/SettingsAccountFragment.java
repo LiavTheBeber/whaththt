@@ -42,12 +42,12 @@ public class SettingsAccountFragment extends Fragment {
     private String KEY_USERNAME = "Username";
     private String KEY_EMAIL = "Email";
     private String KEY_PHONE = "Phone";
+    private String KEY_NORMALUSER = "normalUser";
 
     private String userID,username,email,phone;
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
     private DocumentReference docRef;
-
 
 
 
@@ -76,19 +76,6 @@ public class SettingsAccountFragment extends Fragment {
         listViewItems.setAdapter(accountItemAdapter);
 
         userID = mAuth.getCurrentUser().getUid();
-        docRef.get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.exists()) {
-
-                username = documentSnapshot.getString("username");
-                email = documentSnapshot.getString("email");
-                phone = documentSnapshot.getString("phone");
-
-                accountItems.add(new AccountItem(KEY_USERNAME,username));
-                accountItems.add(new AccountItem(KEY_EMAIL,email));
-                accountItems.add(new AccountItem(KEY_PHONE,phone));
-
-            }
-        });
 
         listViewItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -99,8 +86,9 @@ public class SettingsAccountFragment extends Fragment {
 
             }
         });
-
-
     }
+
+
+
 
 }

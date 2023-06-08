@@ -14,6 +14,7 @@ import com.example.whaththt.company_classes.CompanyProfileFragment;
 import com.example.whaththt.normal_classes.NormalHomeFragment;
 import com.example.whaththt.normal_classes.NormalProfileFragment;
 import com.example.whaththt.settings.SettingsFragment;
+import com.example.whaththt.settings.account.SettingsAccountFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -21,14 +22,12 @@ import com.google.android.material.navigation.NavigationBarView;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavView;
-
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor myEdit;
     String normalUser;
     Intent intent;
     String receivedString;
-
-
+    private String KEY_NORMALUSER = "normalUser";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else if (item.getItemId() == R.id.nav_settings) {
-                    SettingsFragment settingsFragment = new SettingsFragment();
-                    Bundle args = new Bundle();
-                    args.putString("normalUser", receivedString);
-                    settingsFragment.setArguments(args);
                     replaceFragment(new SettingsFragment());
                     return true;
                 }

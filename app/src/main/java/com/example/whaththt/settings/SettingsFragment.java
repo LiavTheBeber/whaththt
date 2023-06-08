@@ -26,6 +26,7 @@ public class SettingsFragment extends Fragment {
     private List<SettingsItem> settingItems;
     private SettingsItemAdapter settingsItemAdapter;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,6 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-
         listViewItems = view.findViewById(R.id.list_view_items);
         return view;
     }
@@ -45,8 +45,9 @@ public class SettingsFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, @NonNull Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        settingItems = new ArrayList<>();
 
+
+        settingItems = new ArrayList<>();
         settingsItemAdapter  = new SettingsItemAdapter(requireContext(),settingItems);
         listViewItems.setAdapter(settingsItemAdapter);
 
@@ -58,12 +59,9 @@ public class SettingsFragment extends Fragment {
                 SettingsItem selectedItem = (SettingsItem) parent.getItemAtPosition(position);
 
                 if (selectedItem.getItemTitle().toString().equals("Account")){
-                    replaceFragment(new SettingsAccountFragment());
+                    SettingsAccountFragment settingsAccountFragment = new SettingsAccountFragment();
+                    replaceFragment(settingsAccountFragment);
                 }
-
-
-
-
 
             }
         });
