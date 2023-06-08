@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     String normalUser;
     Intent intent;
     String receivedString;
-    private String KEY_NORMALUSER = "normalUser";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
