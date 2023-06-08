@@ -12,9 +12,9 @@ import com.example.whaththt.R;
 
 import java.util.List;
 
-public class SettingsItemAdapter extends ArrayAdapter<SettingItem> {
+public class SettingsItemAdapter extends ArrayAdapter<SettingsItem> {
 
-    public SettingsItemAdapter(Context context, List<SettingItem> settingItems) {
+    public SettingsItemAdapter(Context context, List<SettingsItem> settingItems) {
         super(context, 0, settingItems);
     }
 
@@ -25,7 +25,7 @@ public class SettingsItemAdapter extends ArrayAdapter<SettingItem> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        SettingItem settingItem = getItem(position);
+        SettingsItem settingItem = getItem(position);
 
         ViewHolder viewHolder;
         if (convertView == null){

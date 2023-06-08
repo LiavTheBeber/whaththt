@@ -43,7 +43,7 @@ public class NormalHomeFragment extends Fragment {
     LatLng location;
     CompanyProfileAdapter companyProfileAdapter;
     List<UserCompany> profileItems;
-    Button btn;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

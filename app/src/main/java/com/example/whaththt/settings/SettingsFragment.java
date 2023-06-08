@@ -1,22 +1,20 @@
 package com.example.whaththt.settings;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-import com.example.whaththt.AuthenticationActivity;
 import com.example.whaththt.R;
-import com.example.whaththt.side_classes.User;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.whaththt.company_classes.ViewCompanyProfileFragment;
+import com.example.whaththt.settings.account.SettingsAccountFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +23,7 @@ import java.util.List;
 public class SettingsFragment extends Fragment {
 
     private ListView listViewItems;
-    private List<SettingItem> settingItems;
+    private List<SettingsItem> settingItems;
     private SettingsItemAdapter settingsItemAdapter;
 
     @Override
@@ -57,9 +55,10 @@ public class SettingsFragment extends Fragment {
         listViewItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
-                SettingItem settingItem = (SettingItem) parent.getItemAtPosition(position);
+                SettingsItem settingItem = (SettingsItem) parent.getItemAtPosition(position);
 
                 Toast.makeText(requireContext(), settingItem.getItemTitle() , Toast.LENGTH_SHORT).show();
+                navigateToAccountFragment();
 
             }
         });
@@ -72,13 +71,20 @@ public class SettingsFragment extends Fragment {
     }
 
     private void AddItems(){
-        settingItems.add(new SettingItem(R.drawable.baseline_person_24,"Account"));
-        settingItems.add(new SettingItem(R.drawable.baseline_notifications_24,"Notifications"));
-        settingItems.add(new SettingItem(R.drawable.baseline_remove_red_eye_24,"Appearance"));
-        settingItems.add(new SettingItem(R.drawable.baseline_security_24,"Security"));
-        settingItems.add(new SettingItem(R.drawable.baseline_support_agent_24,"Support"));
-        settingItems.add(new SettingItem(R.drawable.baseline_help_outline_24,"About"));
+        settingItems.add(new SettingsItem(R.drawable.baseline_person_24,"Account"));
+        settingItems.add(new SettingsItem(R.drawable.baseline_notifications_24,"Notifications"));
+        settingItems.add(new SettingsItem(R.drawable.baseline_remove_red_eye_24,"Appearance"));
+        settingItems.add(new SettingsItem(R.drawable.baseline_security_24,"Security"));
+        settingItems.add(new SettingsItem(R.drawable.baseline_support_agent_24,"Support"));
+        settingItems.add(new SettingsItem(R.drawable.baseline_help_outline_24,"About"));
         settingsItemAdapter.notifyDataSetChanged();
+    }
+    public void navigateToAccountFragment() {
+        SettingsAccountFragment settingsAccountFragment = new SettingsAccountFragment();
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(getId(), settingsAccountFragment)
+                .commit();
     }
 
 

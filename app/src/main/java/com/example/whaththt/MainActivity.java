@@ -66,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else if (item.getItemId() == R.id.nav_settings) {
+                    SettingsFragment settingsFragment = new SettingsFragment();
+                    Bundle args = new Bundle();
+                    args.putString("normalUser", receivedString);
+                    settingsFragment.setArguments(args);
                     replaceFragment(new SettingsFragment());
                     return true;
                 }

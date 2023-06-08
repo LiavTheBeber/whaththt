@@ -1,11 +1,11 @@
 package com.example.whaththt.settings;
 
-public class SettingItem {
+public class SettingsItem {
 
     private int imageResource;
     private String itemTitle;
 
-    public SettingItem(int imageResource, String itemTitle){
+    public SettingsItem(int imageResource, String itemTitle){
         this.imageResource = imageResource;
         this.itemTitle = itemTitle;
     }
